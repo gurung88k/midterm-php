@@ -6,7 +6,7 @@ $title = 'Cuisines';
 <fieldset>
     <form action="foods.php" method="post">
     <label for="cuisine">Cuisines Available:</label>
-    <select id="category" name="category" required>
+    <select id="cuisine" name="cuisine" required>
         <?php
         // connect
         include('shared/db.php');
