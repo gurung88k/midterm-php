@@ -5,9 +5,9 @@ if (is_numeric($foodId)) {
 include('shared/db.php');
 
 // prepare SQL DELETE
-$sql = "DELETE FROM foods WHERE foodId = :foodId";
+$sql = "DELETE FROM foods WHERE foods['Id'] = :foodId";
 $cmd = $db->prepare($sql);
-$cmd->bindParam(':showId', $showId, PDO::PARAM_INT);
+$cmd->bindParam(':foodId', $foodId, PDO::PARAM_INT);
 
 // execute the delete
 $cmd->execute();
@@ -16,7 +16,7 @@ $cmd->execute();
 $db = null;
 
 // show a message (temporarily)
-echo 'Show Deleted';
+echo 'food Deleted';
 
 // redirect back to updated shows.php (eventually)
 header('select-cuisine.php');
