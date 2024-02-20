@@ -1,36 +1,29 @@
 <?php
 $title = 'Cuisines';
-include('shared/header.php'); ?>
-<?php
-// Include necessary files
-include('shared/db.php');
+ ?>
 
-// Fetch categories from database
-$sql = "SELECT * FROM cuisines";
-$cmd = $db->prepare($sql);
-$cmd->bindParam(':cuisines', $cuisines, PDO::PARAM_STR);
-$cmd->execute();
-$categories = $cmd->fetchAll();
-
-// Close database connection
-$db = null;
-?>
 <h2>Select Cuisines</h2>
 <fieldset>
     <form action="foods.php" method="post">
-    <label for="cuisine">:</label>
+    <label for="cuisine">Cuisines Available:</label>
     <select id="category" name="category" required>
         <?php
-            // set up & run query, store data results
-            $sql = "SELECT * FROM cuisines ORDER BY name";
-            $cmd = $db->prepare($sql);
-            $cmd->execute();
-            $services = $cmd->fetchAll();
+        // connect
+        include('shared/db.php');
 
-             foreach ($cuisines as $cuisine) {
-            <option value="<?php echo $cuisine['Id']; ?>"><?php echo $cuisine['name']; ?></option>
+        // set up & run query, store data results
+        $sql = "SELECT * FROM cuisines ORDER BY name";
+        $cmd = $db->prepare($sql);
+        $cmd->execute();
+        $cuisines=$cmd->fetchAll();
+
+        // loop through list of services, adding each one to dropdown 1 at a time
+        foreach ($cuisines as $cuisine) {
+            echo '<option>' . $cuisine['name'] . '</option>';
         }
-            $db = null;
+
+        // disconnect
+        $db = null;
         ?>
     </select>
 </fieldset>
